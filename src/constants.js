@@ -1,0 +1,1 @@
+export const LOREM_API_URI = 'http://localhost:3001/api/v1/lorem';
