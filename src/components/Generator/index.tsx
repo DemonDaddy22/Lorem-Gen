@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { LOREM_API_URI } from '../../constants';
+import { DEV_LOREM_API_URI } from '../../constants';
 import GenerateButton from '../GenerateButton';
+import OutputBox from '../OutputBox';
 import classes from './styles.module.scss';
 
-const CHOICES = Object.freeze({
+export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
     SENTENCE: { id: 1, label: 'Sentence', key: 'sentences' },
     PARAGRAPH: { id: 2, label: 'Paragraph', key: 'paragraphs' },
 });
 
 const Generator = () => {
-    const [choice, setChoice] = React.useState(CHOICES.PARAGRAPH);
+    const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(true);
     const [loading, setLoading] = React.useState(false);
@@ -19,9 +20,11 @@ const Generator = () => {
     const fetchLoremIpsum = async (count: number) => {
         setLoading(true);
         try {
-            const res = await fetch(`${LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem}`);
+            const res = await fetch(
+                `${DEV_LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem}`
+            );
             const data = await res.json();
-            setOutput(data);
+            setOutput(data?.data ? data.data : []);
         } catch (err) {
             setError(err);
         } finally {
@@ -31,7 +34,8 @@ const Generator = () => {
 
     return (
         <div className={classes.generator}>
-            <GenerateButton style={{ marginTop: 12 }} fetchLoremIpsum={fetchLoremIpsum} />
+            <OutputBox style={{ marginTop: 12 }} output={output} choice={choice.id} />
+            <GenerateButton style={{ marginTop: 16 }} fetchLoremIpsum={fetchLoremIpsum} />
         </div>
     );
 };
