@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LOREM_API_URI } from '../../constants';
+import GenerateButton from '../GenerateButton';
 import classes from './styles.module.scss';
 
 const CHOICES = Object.freeze({
@@ -15,7 +16,7 @@ const Generator = () => {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
-    const fetchLoremIpsum = async (count?: number) => {
+    const fetchLoremIpsum = async (count: number) => {
         setLoading(true);
         try {
             const res = await fetch(`${LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem}`);
@@ -30,7 +31,7 @@ const Generator = () => {
 
     return (
         <div className={classes.generator}>
-            <button className={classes.generateBtn} onClick={() => fetchLoremIpsum(4)}>Generate</button>
+            <GenerateButton style={{ marginTop: 12 }} fetchLoremIpsum={fetchLoremIpsum} />
         </div>
     );
 };
