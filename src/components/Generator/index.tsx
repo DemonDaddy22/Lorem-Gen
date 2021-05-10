@@ -11,7 +11,7 @@ export const CHOICES = Object.freeze({
 });
 
 const Generator = () => {
-    const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
+    const [choice, setChoice] = React.useState(CHOICES.PARAGRAPH);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(true);
     const [loading, setLoading] = React.useState(false);
