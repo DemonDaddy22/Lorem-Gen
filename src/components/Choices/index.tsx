@@ -8,6 +8,7 @@ interface Choice {
 }
 
 interface ChoicesProps {
+    header: string;
     choices: Choice[];
     active: Choice;
     onClick: (choice: Choice) => void;
@@ -17,11 +18,11 @@ interface ChoicesProps {
 }
 
 const Choices = (props: ChoicesProps) => {
-    const { choices, active, onClick, choiceStyle, choicesStyle, containerStyle } = props;
+    const { header, choices, active, onClick, choiceStyle, choicesStyle, containerStyle } = props;
 
     return choices?.length ? (
         <div style={containerStyle}>
-            <div className={classes.choicesHeader}>Type</div>
+            <div className={classes.choicesHeader}>{header}</div>
             <div className={classes.choices} style={choicesStyle}>
                 {choices.map((choice: Choice) => (
                     <div

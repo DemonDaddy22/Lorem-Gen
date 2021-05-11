@@ -11,45 +11,56 @@ export const CHOICES = Object.freeze({
     PARAGRAPH: { id: 2, label: 'Paragraph', key: 'paragraphs' },
 });
 
+export const START_WITH_LOREM_CHOICES = Object.freeze({
+    YES: { id: 11, label: 'Yes', key: 'yes' },
+    NO: { id: 12, label: 'No', key: 'no' },
+});
+
 const Generator = () => {
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
-    const [startWithLorem, setStartWithLorem] = React.useState(true);
+    const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-    const fetchLoremIpsum = React.useCallback(
-        async (count: number) => {
-            setLoading(true);
-            try {
-                const res = await fetch(
-                    `${DEV_LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem}`
-                );
-                const data = await res.json();
-                setOutput(data?.data ? data.data : []);
-            } catch (err) {
-                setError(err);
-            } finally {
-                setLoading(false);
-            }
-        },
-        [choice.key, startWithLorem]
-    );
+    const fetchLoremIpsum = async (count: number) => {
+        setLoading(true);
+        try {
+            const res = await fetch(
+                `${DEV_LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem.id === 11}`
+            );
+            const data = await res.json();
+            setOutput(data?.data ? data.data : []);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     React.useEffect(() => {
         fetchLoremIpsum(4);
-    }, [fetchLoremIpsum]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className={classes.generator}>
-            <Choices
-                choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
-                active={choice}
-                onClick={setChoice}
-                containerStyle={{ marginTop: 16 }}
-            />
+            <div className={classes.optionsWrapper}>
+                <Choices
+                    header='Type'
+                    choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
+                    active={choice}
+                    onClick={setChoice}
+                />
+                <Choices
+                    header='Start with Lorem Ipsum'
+                    choices={[START_WITH_LOREM_CHOICES.YES, START_WITH_LOREM_CHOICES.NO]}
+                    active={startWithLorem}
+                    onClick={setStartWithLorem}
+                />
+            </div>
             <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
-            <GenerateButton style={{ marginTop: 16 }} fetchLoremIpsum={fetchLoremIpsum} />
+            <GenerateButton style={{ marginTop: 32 }} fetchLoremIpsum={fetchLoremIpsum} />
         </div>
     );
 };
