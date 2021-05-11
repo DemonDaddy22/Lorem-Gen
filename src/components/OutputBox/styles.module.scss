@@ -11,22 +11,22 @@
     padding: 1rem;
     position: relative;
     text-align: left;
-    width: 90%;
+    min-width: 90%;
 
     &:hover .copyBtn {
         opacity: 1;
     }
 
     @media (min-width: 768px) {
-        width: 80%;
+        min-width: 80%;
     }
 
     @media (min-width: 1024px) {
-        width: 75%;
+        min-width: 75%;
     }
 
     @media (min-width: 1500px) {
-        width: 50%;
+        min-width: 50%;
         max-width: 1600px;
     }
 }
