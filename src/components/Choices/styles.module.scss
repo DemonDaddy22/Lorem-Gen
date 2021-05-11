@@ -21,14 +21,14 @@
 
 .choice {
     background-color: transparent;
-    border: 1px solid #fff;
+    border: 1px solid #ffffff3f;
     color: #fff;
     cursor: pointer;
     font-size: 0.85rem;
     letter-spacing: -0.25px;
     padding: 6px 8px;
     text-transform: uppercase;
-    transition: color 0.15s, background-color 0.15s;
+    transition: color 0.15s, background-color 0.15s, border 0.15s;
 
     &:first-of-type {
         border-top-left-radius: 4px;
@@ -42,6 +42,7 @@
 
     &:hover {
         background-color: #fff;
+        border-color: #fff;
         color: #292f52;
     }
 
@@ -56,6 +57,7 @@
 
 .activeChoice {
     background-color: #fff;
+    border-color: #fff;
     color: #292f52;
     cursor: auto;
 }

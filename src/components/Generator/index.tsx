@@ -15,7 +15,7 @@ const Generator = () => {
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(true);
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
     const fetchLoremIpsum = React.useCallback(
@@ -35,6 +35,10 @@ const Generator = () => {
         },
         [choice.key, startWithLorem]
     );
+
+    React.useEffect(() => {
+        fetchLoremIpsum(4);
+    }, [fetchLoremIpsum]);
 
     return (
         <div className={classes.generator}>
