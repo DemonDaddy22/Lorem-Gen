@@ -1,4 +1,5 @@
 .outputBox {
+    background-color: #292f52;
     border: 1px solid #ffffff3f;
     border-radius: 4px;
     color: #fff;
@@ -10,8 +11,9 @@
     height: 300px;
     overflow-y: auto;
     padding: 1rem;
-    position: relative;
+    position: absolute;
     text-align: left;
+    z-index: 1;
 
     &:hover .copyBtn {
         opacity: 1;

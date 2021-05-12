@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Square from '../../assets/square';
 import { DEV_LOREM_API_URI } from '../../constants';
 import Choices from '../Choices';
 import GenerateButton from '../GenerateButton';
@@ -59,7 +60,12 @@ const Generator = () => {
                     onClick={setStartWithLorem}
                 />
             </div>
-            <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
+            <div className={classes.outputboxWrapper}>
+                <div className={classes.imageWrapper}>
+                    <Square />
+                </div>
+                <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
+            </div>
             <GenerateButton style={{ marginTop: 32 }} fetchLoremIpsum={fetchLoremIpsum} />
         </div>
     );
