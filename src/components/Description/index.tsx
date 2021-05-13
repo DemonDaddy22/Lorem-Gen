@@ -1,15 +1,18 @@
 import * as React from 'react';
 import classes from './styles.module.scss';
-import { HeaderProps } from '../Header';
 
-interface DescriptionProps extends HeaderProps {}
+interface DescriptionProps {
+    children: React.ReactNode,
+    color?: string,
+    style?: React.CSSProperties
+}
 
 const Description = (props: DescriptionProps) => {
-    const { label, color, style } = props;
+    const { children, color, style } = props;
 
     return (
         <div className={classes.description} style={{ ...style, color }}>
-            {label}
+            {children}
         </div>
     );
 };

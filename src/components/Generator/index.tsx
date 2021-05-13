@@ -11,6 +11,7 @@ import ClipBoard from '../../assets/clipboard';
 import ClipBoardChecked from '../../assets/clipboardChecked';
 
 // TODO - create a throttle method on resize to update icon size for smaller screens
+// TODO - set the focus on copy button when app loads
 
 export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
