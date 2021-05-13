@@ -1,0 +1,44 @@
+.inputContainer {
+    text-align: left;
+}
+
+.inputLabel {
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: -0.25px;
+    margin-bottom: 8px;
+    text-align: left;
+
+    @media (min-width: 992px) {
+        font-size: 0.85rem;
+    }
+
+    @media (min-width: 1500px) {
+        font-size: 0.95rem;
+    }
+}
+
+.input {
+    background-color: transparent;
+    border: 1px solid #ffffff3f;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    padding: 7px;
+    transition: border 0.15s;
+
+    &:hover, &:active {
+        outline: none;
+        border-color: #fff;
+    }
+
+    @media (min-width: 992px) {
+        padding: 8.25px 8px;
+    }
+
+    @media (min-width: 1500px) {
+        padding: 9.5px 8px;
+    }
+}

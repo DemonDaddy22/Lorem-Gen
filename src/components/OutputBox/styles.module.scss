@@ -10,14 +10,17 @@
     margin: 0 auto;
     height: 300px;
     overflow-y: auto;
-    padding: 1rem;
-    position: absolute;
+    position: relative;
     text-align: left;
     z-index: 1;
 
     &:hover .copyBtn {
         opacity: 1;
     }
+}
+
+.outputContent {
+    padding: 1rem;
 }
 
 .copyBtn {
@@ -28,8 +31,6 @@
     justify-content: center;
     opacity: 0;
     padding: 4px;
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: fixed;
     transition: opacity 0.15s;
 }

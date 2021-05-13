@@ -5,23 +5,46 @@
 .outputboxWrapper {
     position: relative;
 
-    .imageWrapper {
+    .imageOneWrapper {
         opacity: 0.75;
         position: absolute;
         right: 0;
         top: 0;
-        transform: translate(50%, -25%);
+        transform: translate(-10%, -30%);
+
+        @media (min-width: 768px) {
+            transform: translate(50%, -50%);
+        }
+    }
+    
+    .imageTwoWrapper {
+        opacity: 0.75;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translate(-60%, -75%);
+    }
+
+    .imageThreeWrapper {
+        opacity: 0.5;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: translate(-10%, 75%) rotate(180deg);
+
+        @media (min-width: 992px) {
+            transform: translate(-75%, 75%) rotate(180deg);
+        }
     }
 }
 
 .optionsWrapper {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-top: 2.5rem;
 
     @media (min-width: 992px) {
-        flex-direction: row;
         gap: 1rem;
     }
 

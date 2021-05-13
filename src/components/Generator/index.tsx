@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Square from '../../assets/square';
+import Triangle from '../../assets/triangle';
 import { DEV_LOREM_API_URI } from '../../constants';
 import Choices from '../Choices';
+import CountInput from '../CountInput';
 import GenerateButton from '../GenerateButton';
 import OutputBox from '../OutputBox';
 import classes from './styles.module.scss';
@@ -18,13 +20,14 @@ export const START_WITH_LOREM_CHOICES = Object.freeze({
 });
 
 const Generator = () => {
+    const [count, setCount] = React.useState(4);
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
-    const fetchLoremIpsum = async (count: number) => {
+    const fetchLoremIpsum = async () => {
         setLoading(true);
         try {
             const res = await fetch(
@@ -39,14 +42,19 @@ const Generator = () => {
         }
     };
 
+    const handleCountChange = React.useCallback(e => {
+        setCount(e.target.value);
+    }, []);
+
     React.useEffect(() => {
-        fetchLoremIpsum(4);
+        fetchLoremIpsum();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div className={classes.generator}>
             <div className={classes.optionsWrapper}>
+                <CountInput count={count} label='Count' onChange={handleCountChange} />
                 <Choices
                     header='Type'
                     choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
@@ -61,8 +69,14 @@ const Generator = () => {
                 />
             </div>
             <div className={classes.outputboxWrapper}>
-                <div className={classes.imageWrapper}>
+                <div className={classes.imageOneWrapper}>
                     <Square />
+                </div>
+                <div className={classes.imageTwoWrapper}>
+                    <Square />
+                </div>
+                <div className={classes.imageThreeWrapper}>
+                    <Triangle height={80} width={100} />
                 </div>
                 <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
             </div>

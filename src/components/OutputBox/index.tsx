@@ -46,11 +46,21 @@ const OutputBox = (props: OutputBoxProps) => {
 
     return output?.length ? (
         <div className={classes.outputBox} style={style}>
-            {output.map((sentence, i) => (
-                <div key={`sentence-${i}`}>{sentence}</div>
-            ))}
             <div className={classes.copyBtn} onClick={!isCopied ? handleCopy : () => {}}>
                 {!isCopied ? <ClipBoard /> : <ClipBoardChecked />}
+            </div>
+            <div className={classes.outputContent}>
+                {output.map((sentence, i) => (
+                    <React.Fragment key={`sentence-${i}`}>
+                        {sentence}
+                        {choice === CHOICES.PARAGRAPH.id && i < output.length - 1 && (
+                            <>
+                                <br />
+                                <br />
+                            </>
+                        )}
+                    </React.Fragment>
+                ))}
             </div>
         </div>
     ) : null;
