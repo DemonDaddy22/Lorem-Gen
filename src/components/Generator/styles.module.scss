@@ -16,7 +16,7 @@
             transform: translate(50%, -50%);
         }
     }
-    
+
     .imageTwoWrapper {
         opacity: 0.75;
         position: absolute;
@@ -51,4 +51,12 @@
     @media (min-width: 1200px) {
         gap: 2rem;
     }
+}
+
+.btnWrapper {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 16px;
+    text-align: left;
 }

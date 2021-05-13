@@ -2,11 +2,15 @@ import * as React from 'react';
 import Square from '../../assets/square';
 import Triangle from '../../assets/triangle';
 import { DEV_LOREM_API_URI } from '../../constants';
+import Button from '../Button';
 import Choices from '../Choices';
 import CountInput from '../CountInput';
-import GenerateButton from '../GenerateButton';
 import OutputBox from '../OutputBox';
 import classes from './styles.module.scss';
+import ClipBoard from '../../assets/clipboard';
+import ClipBoardChecked from '../../assets/clipboardChecked';
+
+// TODO - create a throttle method on resize to update icon size for smaller screens
 
 export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
@@ -19,11 +23,33 @@ export const START_WITH_LOREM_CHOICES = Object.freeze({
     NO: { id: 12, label: 'No', key: 'no' },
 });
 
+export const copyTextToClipboard = (content: string) => {
+    if (!content) return;
+
+    let textArea = document.createElement('textarea');
+    textArea.value = content;
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.position = 'fixed';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        document.execCommand('copy');
+    } catch (err) {
+        console.error(err);
+    }
+
+    document.body.removeChild(textArea);
+};
+
 const Generator = () => {
     const [count, setCount] = React.useState(4);
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
+    const [isCopied, setIsCopied] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
@@ -45,6 +71,15 @@ const Generator = () => {
     const handleCountChange = React.useCallback(e => {
         setCount(e.target.value);
     }, []);
+
+    const handleCopy = React.useCallback(() => {
+        if (output?.length) {
+            setIsCopied(true);
+            const contentString = output.join(choice.id === CHOICES.PARAGRAPH.id ? '\n\n' : ' ');
+            copyTextToClipboard(contentString);
+            setTimeout(() => setIsCopied(false), 2000);
+        }
+    }, [choice, output]);
 
     React.useEffect(() => {
         fetchLoremIpsum();
@@ -80,7 +115,13 @@ const Generator = () => {
                 </div>
                 <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
             </div>
-            <GenerateButton style={{ marginTop: 32 }} fetchLoremIpsum={fetchLoremIpsum} />
+            <div className={classes.btnWrapper}>
+                <Button onClick={fetchLoremIpsum}>Generate</Button>
+                <Button onClick={handleCopy} style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}>
+                    Cop{isCopied ? 'ied!' : 'y'}
+                    {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
+                </Button>
+            </div>
         </div>
     );
 };
