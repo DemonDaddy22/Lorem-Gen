@@ -1,15 +1,14 @@
 import * as React from 'react';
-import { CHOICES } from '../Generator';
 import classes from './styles.module.scss';
 
 interface OutputBoxProps {
-    choice: number;
+    choice?: number;
     output: string[];
     style?: React.CSSProperties;
 }
 
 const OutputBox = (props: OutputBoxProps) => {
-    const { choice, output, style } = props;
+    const { output, style } = props;
 
     return output?.length ? (
         <div className={classes.outputBox} style={style}>
@@ -17,7 +16,7 @@ const OutputBox = (props: OutputBoxProps) => {
                 {output.map((sentence, i) => (
                     <React.Fragment key={`sentence-${i}`}>
                         {sentence}
-                        {choice === CHOICES.PARAGRAPH.id && i < output.length - 1 && (
+                        {i < output.length - 1 && (
                             <>
                                 <br />
                                 <br />

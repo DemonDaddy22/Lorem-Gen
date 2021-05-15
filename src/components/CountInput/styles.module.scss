@@ -24,9 +24,10 @@
     border: 1px solid #ffffff3f;
     border-radius: 4px;
     color: #fff;
+    font-size: 0.85rem;
     font-weight: 600;
     outline: none;
-    padding: 7px;
+    padding: 7px 8px;
     transition: border 0.15s;
 
     &:hover, &:active {
@@ -35,10 +36,10 @@
     }
 
     @media (min-width: 992px) {
-        padding: 8.25px 8px;
+        font-size: 0.95rem;
     }
 
     @media (min-width: 1500px) {
-        padding: 9.5px 8px;
+        font-size: 1.05rem;
     }
 }

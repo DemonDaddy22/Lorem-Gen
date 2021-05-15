@@ -22,7 +22,9 @@ const Choices = (props: ChoicesProps) => {
 
     return choices?.length ? (
         <div style={containerStyle}>
-            <div className={classes.choicesHeader}>{header}</div>
+            <div className={classes.choicesHeader}>
+                {header}
+            </div>
             <div className={classes.choices} style={choicesStyle}>
                 {choices.map((choice: Choice) => (
                     <div

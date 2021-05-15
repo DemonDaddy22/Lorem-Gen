@@ -10,6 +10,21 @@ import classes from './styles.module.scss';
 import ClipBoard from '../../assets/clipboard';
 import ClipBoardChecked from '../../assets/clipboardChecked';
 import AppError from '../AppError';
+import { motion } from 'framer-motion';
+
+const variants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            delay: 3,
+            when: 'beforeChildren',
+            staggerChildren: 0.5,
+        },
+    },
+};
 
 export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
@@ -28,8 +43,8 @@ const Generator = () => {
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
     const [isCopied, setIsCopied] = React.useState(false);
-    const [loading, setLoading] = React.useState(true);
-    const [error, setError] = React.useState(null);
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState(false);
 
     const copyTextToClipboard = React.useCallback((content: string) => {
         if (!content) return;
@@ -45,9 +60,9 @@ const Generator = () => {
 
         try {
             document.execCommand('copy');
-            setError(null);
+            setError(false);
         } catch (err) {
-            setError(err);
+            setError(true);
         }
 
         document.body.removeChild(textArea);
@@ -61,9 +76,9 @@ const Generator = () => {
             );
             const data = await res.json();
             setOutput(data?.data ? data.data : []);
-            setError(null);
+            setError(false);
         } catch (err) {
-            setError(err);
+            setError(true);
         } finally {
             setLoading(false);
         }
@@ -82,55 +97,54 @@ const Generator = () => {
         }
     }, [choice.id, copyTextToClipboard, output]);
 
-    const renderContent = () => !error && (
-        <div className={classes.generator}>
-            <div className={classes.optionsWrapper}>
-                <CountInput count={count} label='Count' onChange={handleCountChange} />
-                <Choices
-                    header='Type'
-                    choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
-                    active={choice}
-                    onClick={setChoice}
-                />
-                <Choices
-                    header='Start with Lorem Ipsum'
-                    choices={[START_WITH_LOREM_CHOICES.YES, START_WITH_LOREM_CHOICES.NO]}
-                    active={startWithLorem}
-                    onClick={setStartWithLorem}
-                />
-            </div>
-            <div className={classes.outputboxWrapper}>
-                <div className={classes.imageOneWrapper}>
-                    <Square />
+    const renderContent = () =>
+        !error && (
+            <motion.div variants={variants} initial='hidden' animate='visible' className={classes.generator}>
+                <div className={classes.optionsWrapper}>
+                    <CountInput count={count} label='Count' onChange={handleCountChange} />
+                    <Choices
+                        header='Type'
+                        choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
+                        active={choice}
+                        onClick={setChoice}
+                    />
+                    <Choices
+                        header='Start with Lorem Ipsum'
+                        choices={[START_WITH_LOREM_CHOICES.YES, START_WITH_LOREM_CHOICES.NO]}
+                        active={startWithLorem}
+                        onClick={setStartWithLorem}
+                    />
                 </div>
-                <div className={classes.imageTwoWrapper}>
-                    <Square />
+                <div className={classes.outputboxWrapper}>
+                    <div className={classes.imageOneWrapper}>
+                        <Square />
+                    </div>
+                    <div className={classes.imageTwoWrapper}>
+                        <Square />
+                    </div>
+                    <div className={classes.imageThreeWrapper}>
+                        <Triangle height={80} width={100} />
+                    </div>
+                    <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
                 </div>
-                <div className={classes.imageThreeWrapper}>
-                    <Triangle height={80} width={100} />
+                <div className={classes.btnWrapper}>
+                    <Button id='generate-btn' onClick={fetchLoremIpsum}>
+                        Generate
+                    </Button>
+                    <Button
+                        id='copy-btn'
+                        focus
+                        onClick={handleCopy}
+                        style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}
+                    >
+                        Cop{isCopied ? 'ied!' : 'y'}
+                        {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
+                    </Button>
                 </div>
-                <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
-            </div>
-            <div className={classes.btnWrapper}>
-                <Button id='generate-btn' onClick={fetchLoremIpsum}>
-                    Generate
-                </Button>
-                <Button
-                    id='copy-btn'
-                    focus
-                    onClick={handleCopy}
-                    style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}
-                >
-                    Cop{isCopied ? 'ied!' : 'y'}
-                    {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
-                </Button>
-            </div>
-        </div>
-    );
+            </motion.div>
+        );
 
     const renderError = () => !loading && error && <AppError label='Something went wrong! Please try again later.' />;
-
-    const renderLoader = () => loading && <h2>Loading...</h2>;
 
     React.useEffect(() => {
         fetchLoremIpsum();
@@ -140,7 +154,6 @@ const Generator = () => {
     return (
         <>
             {renderError()}
-            {renderLoader()}
             {renderContent()}
         </>
     );
