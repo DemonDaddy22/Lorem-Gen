@@ -1,7 +1,7 @@
 {
   "name": "lorem-gen",
   "version": "0.1.0",
-  "homepage": "https://DemonDaddy22.github.io/lorem-gen/",
+  "homepage": "https://DemonDaddy22.github.io/Lorem-Gen/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
