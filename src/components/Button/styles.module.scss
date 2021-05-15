@@ -4,7 +4,7 @@
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     font-weight: 200;
     letter-spacing: 0.5px;
     outline: none;
@@ -32,12 +32,10 @@
     }
 
     @media (min-width: 992px) {
-        font-size: 0.85rem;
         padding: 8px 12px;
     }
 
     @media (min-width: 1500px) {
-        font-size: 0.95rem;
         padding: 10px 14px;
     }
 }

@@ -10,9 +10,6 @@ import classes from './styles.module.scss';
 import ClipBoard from '../../assets/clipboard';
 import ClipBoardChecked from '../../assets/clipboardChecked';
 
-// TODO - create a throttle method on resize to update icon size for smaller screens
-// TODO - set the focus on copy button when app loads
-
 export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
     SENTENCE: { id: 1, label: 'Sentence', key: 'sentences' },
@@ -117,8 +114,8 @@ const Generator = () => {
                 <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
             </div>
             <div className={classes.btnWrapper}>
-                <Button onClick={fetchLoremIpsum}>Generate</Button>
-                <Button onClick={handleCopy} style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}>
+                <Button id='generate-btn' onClick={fetchLoremIpsum}>Generate</Button>
+                <Button id='copy-btn' focus onClick={handleCopy} style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}>
                     Cop{isCopied ? 'ied!' : 'y'}
                     {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
                 </Button>
