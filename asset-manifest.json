@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Lorem-Gen/static/css/main.f742e3ed.chunk.css",
-    "main.js": "/Lorem-Gen/static/js/main.2aa14ba5.chunk.js",
-    "main.js.map": "/Lorem-Gen/static/js/main.2aa14ba5.chunk.js.map",
+    "main.js": "/Lorem-Gen/static/js/main.1712d99b.chunk.js",
+    "main.js.map": "/Lorem-Gen/static/js/main.1712d99b.chunk.js.map",
     "runtime-main.js": "/Lorem-Gen/static/js/runtime-main.0d71b74f.js",
     "runtime-main.js.map": "/Lorem-Gen/static/js/runtime-main.0d71b74f.js.map",
     "static/js/2.6ec143c3.chunk.js": "/Lorem-Gen/static/js/2.6ec143c3.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0d71b74f.js",
     "static/js/2.6ec143c3.chunk.js",
     "static/css/main.f742e3ed.chunk.css",
-    "static/js/main.2aa14ba5.chunk.js"
+    "static/js/main.1712d99b.chunk.js"
   ]
 }
