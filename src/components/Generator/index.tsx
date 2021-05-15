@@ -82,7 +82,7 @@ const Generator = () => {
         }
     }, [choice.id, copyTextToClipboard, output]);
 
-    const renderContent = () => (
+    const renderContent = () => !error && (
         <div className={classes.generator}>
             <div className={classes.optionsWrapper}>
                 <CountInput count={count} label='Count' onChange={handleCountChange} />
