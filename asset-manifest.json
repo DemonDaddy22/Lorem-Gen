@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/lorem-gen/static/css/main.86fe34f2.chunk.css",
+    "main.js": "/lorem-gen/static/js/main.fd22eb61.chunk.js",
+    "main.js.map": "/lorem-gen/static/js/main.fd22eb61.chunk.js.map",
+    "runtime-main.js": "/lorem-gen/static/js/runtime-main.3d67a3b5.js",
+    "runtime-main.js.map": "/lorem-gen/static/js/runtime-main.3d67a3b5.js.map",
+    "static/js/2.e6d956cd.chunk.js": "/lorem-gen/static/js/2.e6d956cd.chunk.js",
+    "static/js/2.e6d956cd.chunk.js.map": "/lorem-gen/static/js/2.e6d956cd.chunk.js.map",
+    "static/js/3.72827b5a.chunk.js": "/lorem-gen/static/js/3.72827b5a.chunk.js",
+    "static/js/3.72827b5a.chunk.js.map": "/lorem-gen/static/js/3.72827b5a.chunk.js.map",
+    "index.html": "/lorem-gen/index.html",
+    "static/css/main.86fe34f2.chunk.css.map": "/lorem-gen/static/css/main.86fe34f2.chunk.css.map",
+    "static/js/2.e6d956cd.chunk.js.LICENSE.txt": "/lorem-gen/static/js/2.e6d956cd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3d67a3b5.js",
+    "static/js/2.e6d956cd.chunk.js",
+    "static/css/main.86fe34f2.chunk.css",
+    "static/js/main.fd22eb61.chunk.js"
+  ]
+}
