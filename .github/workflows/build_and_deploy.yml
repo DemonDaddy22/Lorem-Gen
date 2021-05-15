@@ -18,7 +18,7 @@ jobs:
             - name: Install Packages
               run: npm install
             - name: Perform linting
-              run: num run lint:fix
+              run: npm run lint:fix
             - name: Deploy Application to GH Pages
               run: |
                   git config user.email ${{ secrets.EMAIL }}
