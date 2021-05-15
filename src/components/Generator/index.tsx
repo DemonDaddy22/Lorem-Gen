@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Square from '../../assets/square';
 import Triangle from '../../assets/triangle';
-import { DEV_LOREM_API_URI } from '../../constants';
+import { LOREM_API_URI } from '../../constants';
 import Button from '../Button';
 import Choices from '../Choices';
 import CountInput from '../CountInput';
@@ -22,27 +22,6 @@ export const START_WITH_LOREM_CHOICES = Object.freeze({
     NO: { id: 12, label: 'No', key: 'no' },
 });
 
-export const copyTextToClipboard = (content: string) => {
-    if (!content) return;
-
-    let textArea = document.createElement('textarea');
-    textArea.value = content;
-    textArea.style.top = '0';
-    textArea.style.left = '0';
-    textArea.style.position = 'fixed';
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    try {
-        document.execCommand('copy');
-    } catch (err) {
-        console.error(err);
-    }
-
-    document.body.removeChild(textArea);
-};
-
 const Generator = () => {
     const [count, setCount] = React.useState(4);
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
@@ -52,11 +31,33 @@ const Generator = () => {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
+    const copyTextToClipboard = React.useCallback((content: string) => {
+        if (!content) return;
+
+        let textArea = document.createElement('textarea');
+        textArea.value = content;
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.position = 'fixed';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            setError(null);
+        } catch (err) {
+            setError(err);
+        }
+
+        document.body.removeChild(textArea);
+    }, []);
+
     const fetchLoremIpsum = async () => {
         setLoading(true);
         try {
             const res = await fetch(
-                `${DEV_LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem.id === 11}`
+                `${LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem.id === 11}`
             );
             const data = await res.json();
             setOutput(data?.data ? data.data : []);
@@ -79,7 +80,7 @@ const Generator = () => {
             copyTextToClipboard(contentString);
             setTimeout(() => setIsCopied(false), 2000);
         }
-    }, [choice, output]);
+    }, [choice.id, copyTextToClipboard, output]);
 
     const renderContent = () => (
         <div className={classes.generator}>

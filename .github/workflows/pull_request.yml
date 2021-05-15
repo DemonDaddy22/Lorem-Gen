@@ -1,0 +1,16 @@
+name: Pull Request Label
+on:
+    pull_request:
+        branches:
+            - 'master'
+
+jobs:
+    pr_label:
+        if: github.repository == DemonDaddy22/Lorem-Gen
+        runs-on: ubuntu-latest
+        steps:
+            - name: Adding label
+              uses: actions/labeler@main
+              with:
+                  sync-labels: true
+                  repo-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

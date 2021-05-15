@@ -1,0 +1,20 @@
+modules:
+    - node_modules/*
+    - node_modules/**/*
+
+source:
+    - src/*
+    - src/**/*
+    - public/*
+    - public/**/*
+
+documentation:
+    - '*.md'
+
+package:
+  - 'package.json'
+  - 'package-lock.json'
+
+config:
+  - 'lintconfig.json'
+  - 'tsconfig.json'
