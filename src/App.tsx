@@ -8,7 +8,7 @@ function App() {
         <div className='App'>
             <Header label='Lorem Gen' />
             <Description>
-                <div className='description'>
+                <div>
                     Quickly generate lorem ipsum text to bootstrap your content!
                     <br />
                     It's <em className='pitch'>fast</em>, <em className='pitch'>meaningless</em> and{' '}

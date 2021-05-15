@@ -1,0 +1,36 @@
+.appError {
+    margin: 2rem;
+}
+
+.errorImageWrapper {
+    margin: 0 auto;
+    height: 200px;
+    width: 350px;
+
+    @media (min-width: 768px) {
+        height: 250px;
+        width: 425px;
+    }
+
+    @media (min-width: 992px) {
+        height: 275px;
+        width: 525px;
+    }
+
+    @media (min-width: 1200px) {
+        height: 300px;
+        width: 550px;
+    }
+}
+
+.errorLabel {
+    color: #b8c0e7;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    opacity: 0.5;
+    text-align: center;
+
+    @media (min-width: 1200px) {
+        font-size: 1.25rem;
+    }
+}

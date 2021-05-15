@@ -9,6 +9,7 @@ import OutputBox from '../OutputBox';
 import classes from './styles.module.scss';
 import ClipBoard from '../../assets/clipboard';
 import ClipBoardChecked from '../../assets/clipboardChecked';
+import AppError from '../AppError';
 
 export const CHOICES = Object.freeze({
     WORD: { id: 0, label: 'Word', key: 'words' },
@@ -59,6 +60,7 @@ const Generator = () => {
             );
             const data = await res.json();
             setOutput(data?.data ? data.data : []);
+            setError(null);
         } catch (err) {
             setError(err);
         } finally {
@@ -79,12 +81,7 @@ const Generator = () => {
         }
     }, [choice, output]);
 
-    React.useEffect(() => {
-        fetchLoremIpsum();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return (
+    const renderContent = () => (
         <div className={classes.generator}>
             <div className={classes.optionsWrapper}>
                 <CountInput count={count} label='Count' onChange={handleCountChange} />
@@ -114,13 +111,37 @@ const Generator = () => {
                 <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
             </div>
             <div className={classes.btnWrapper}>
-                <Button id='generate-btn' onClick={fetchLoremIpsum}>Generate</Button>
-                <Button id='copy-btn' focus onClick={handleCopy} style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}>
+                <Button id='generate-btn' onClick={fetchLoremIpsum}>
+                    Generate
+                </Button>
+                <Button
+                    id='copy-btn'
+                    focus
+                    onClick={handleCopy}
+                    style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}
+                >
                     Cop{isCopied ? 'ied!' : 'y'}
                     {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
                 </Button>
             </div>
         </div>
+    );
+
+    const renderError = () => !loading && error && <AppError label='Something went wrong! Please try again later.' />;
+
+    const renderLoader = () => loading && <h2>Loading...</h2>;
+
+    React.useEffect(() => {
+        fetchLoremIpsum();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return (
+        <>
+            {renderError()}
+            {renderLoader()}
+            {renderContent()}
+        </>
     );
 };
 
