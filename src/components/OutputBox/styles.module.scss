@@ -1,8 +1,10 @@
+@import '../../variables.scss';
+
 .outputBox {
-    background-color: #292f52;
-    border: 1px solid #ffffff3f;
+    background-color: $primary;
+    border: $border;
     border-radius: 4px;
-    color: #fff;
+    color: $accent;
     display: flex;
     flex-direction: column;
     font-weight: 200;

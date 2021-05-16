@@ -1,9 +1,11 @@
+@import '../../variables.scss';
+
 .choices {
     display: flex;
 }
 
 .choicesHeader {
-    color: #fff;
+    color: $accent;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: -0.25px;
@@ -21,8 +23,8 @@
 
 .choice {
     background-color: transparent;
-    border: 1px solid #ffffff3f;
-    color: #fff;
+    border: $border;
+    color: $accent;
     cursor: pointer;
     font-size: 0.85rem;
     letter-spacing: -0.25px;
@@ -41,9 +43,9 @@
     }
 
     &:hover {
-        background-color: #fff;
-        border-color: #fff;
-        color: #292f52;
+        background-color: $accent;
+        border-color: $accent;
+        color: $primary;
     }
 
     @media (min-width: 992px) {
@@ -56,8 +58,8 @@
 }
 
 .activeChoice {
-    background-color: #fff;
-    border-color: #fff;
-    color: #292f52;
+    background-color: $accent;
+    border-color: $accent;
+    color: $primary;
     cursor: auto;
 }
