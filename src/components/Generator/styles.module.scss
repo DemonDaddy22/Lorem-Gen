@@ -1,3 +1,11 @@
+@mixin imgWrapper($opacity, $position, $positionOne, $positionOneVal, $positionTwo, $positionTwoVal, $transform) {
+    opacity: $opacity;
+    position: $position;
+    #{$positionOne}: $positionOneVal;
+    #{$positionTwo}: $positionTwoVal;
+    transform: $transform;
+}
+
 .generator {
     position: relative;
 }
@@ -6,32 +14,18 @@
     position: relative;
 
     .imageOneWrapper {
-        opacity: 0.75;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: translate(-10%, -30%);
-
+        @include imgWrapper(0.75, absolute, right, 0, top, 0, translate(50%, -50%));
         @media (min-width: 768px) {
             transform: translate(50%, -50%);
         }
     }
 
     .imageTwoWrapper {
-        opacity: 0.75;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        transform: translate(-60%, -75%);
+        @include imgWrapper(0.75, absolute, left, 0, bottom, 0, translate(-60%, -75%));
     }
 
     .imageThreeWrapper {
-        opacity: 0.5;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        transform: translate(-10%, 75%) rotate(180deg);
-
+        @include imgWrapper(0.5, absolute, right, 0, bottom, 0, translate(-10%, 75%) rotate(180deg));
         @media (min-width: 992px) {
             transform: translate(-75%, 75%) rotate(180deg);
         }
