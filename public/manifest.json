@@ -1,25 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "name": "Lorem Gen",
+  "description": "Quickly generate lorem ipsum text to bootstrap your content!",
+  "version": "0.1.0",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "192x169"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Lorem Gen",
+    "default_icon": "logo128.png"
+  },
+  "permissions": [],
+  "offline_enabled": false,
+  "theme_color": "#292f52"
 }
