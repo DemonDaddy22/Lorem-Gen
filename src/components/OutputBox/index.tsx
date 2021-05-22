@@ -15,7 +15,7 @@ const OutputBox = (props: OutputBoxProps) => {
         <div className={classes.outputBox} style={style}>
             <div className={classes.outputContent}>
                 <div className={classes.loaderWrapper}>
-                    <Loader size={40} loading={loading} />
+                    <Loader size={16} loading={true} />
                 </div>
                 {output?.length
                     ? output.map((sentence, i) => (
