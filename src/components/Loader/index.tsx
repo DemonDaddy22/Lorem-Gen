@@ -4,9 +4,6 @@ import { motion } from 'framer-motion';
 const variants = {
     hidden: {
         opacity: 0,
-        transitionEnd: {
-            display: 'none',
-        },
     },
     visible: {
         opacity: [1, 1, 1, 1, 1],
