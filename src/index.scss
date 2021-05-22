@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
 @import './variables.scss';
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+    background-color: $primary;
     font-family: 'Fira Code', monospace;
+    margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -17,7 +20,6 @@ code {
 }
 
 #root {
-    align-items: center;
     background-color: $primary;
     display: flex;
     height: 100vh;

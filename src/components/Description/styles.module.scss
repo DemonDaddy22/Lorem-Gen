@@ -2,12 +2,19 @@
     font-size: 0.9rem;
     font-weight: 200;
     letter-spacing: -0.2px;
-    line-height: 1.5rem;
+    line-height: 1.3rem;
+    margin: 0.5rem 1rem 0;
     word-wrap: normal;
     word-break: normal;
 
+    .pitch {
+        font-weight: 600;
+    }
+
     @media (min-width: 768px) {
         font-size: 1rem;
+        line-height: 1.5rem;
+        margin: 0;
     }
 
     @media (min-width: 1200px) {

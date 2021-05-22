@@ -50,7 +50,7 @@ const Description = (props: DescriptionProps) => {
                 Quickly generate lorem ipsum text to bootstrap your content!
             </motion.div>
             <motion.div variants={childVariants}>
-                It's <em className='pitch'>fast</em>, <em className='pitch'>meaningless</em> and <em className='pitch'>not-so-boring</em>!
+                It's <em className={classes.pitch}>fast</em>, <em className={classes.pitch}>meaningless</em> and <em className={classes.pitch}>not-so-boring</em>!
             </motion.div>
         </motion.div>
     );
