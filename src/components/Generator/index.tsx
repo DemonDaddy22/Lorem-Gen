@@ -172,7 +172,7 @@ const Generator = () => {
                     <div className={classes.imageThreeWrapper}>
                         <Triangle height={80} width={100} />
                     </div>
-                    <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
+                    <OutputBox loading={loading} style={{ marginTop: 16 }} output={output} />
                 </div>
                 <motion.div variants={buttonVariants} className={classes.btnWrapper}>
                     <Button id='generate-btn' onClick={fetchLoremIpsum}>
