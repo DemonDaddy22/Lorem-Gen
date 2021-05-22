@@ -11,8 +11,7 @@ const variants = {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.25,
-            delay: 3.5,
+            duration: 0.15,
             type: 'spring',
             stiffness: 40,
         },
@@ -40,8 +39,6 @@ const Button = (props: ButtonProps) => {
     return (
         <motion.button
             variants={variants}
-            initial='hidden'
-            animate='visible'
             id={id}
             className={classes.generateBtn}
             style={style}

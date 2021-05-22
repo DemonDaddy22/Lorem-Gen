@@ -1,7 +1,13 @@
 import * as React from 'react';
 import Square from '../../assets/square';
 import Triangle from '../../assets/triangle';
-import { LOREM_API_URI } from '../../constants';
+import {
+    DEFAULT_ERROR_MESSAGE,
+    LOREM_API_URI,
+    CHOICES,
+    START_WITH_LOREM_CHOICES,
+    DEFAULT_COUNT,
+} from '../../constants';
 import Button from '../Button';
 import Choices from '../Choices';
 import CountInput from '../CountInput';
@@ -18,55 +24,45 @@ const variants = {
     },
     visible: {
         opacity: 1,
+    },
+};
+
+const contentVariants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
         transition: {
-            delay: 3,
-            when: 'beforeChildren',
-            staggerChildren: 0.5,
+            duration: 0.6,
         },
     },
 };
 
-export const CHOICES = Object.freeze({
-    WORD: { id: 0, label: 'Word', key: 'words' },
-    SENTENCE: { id: 1, label: 'Sentence', key: 'sentences' },
-    PARAGRAPH: { id: 2, label: 'Paragraph', key: 'paragraphs' },
-});
-
-export const START_WITH_LOREM_CHOICES = Object.freeze({
-    YES: { id: 11, label: 'Yes', key: 'yes' },
-    NO: { id: 12, label: 'No', key: 'no' },
-});
+const buttonVariants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: 0.15,
+        },
+    },
+};
 
 const Generator = () => {
-    const [count, setCount] = React.useState(4);
+    const [count, setCount] = React.useState(DEFAULT_COUNT);
     const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
     const [isCopied, setIsCopied] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(false);
-
-    const copyTextToClipboard = React.useCallback((content: string) => {
-        if (!content) return;
-
-        let textArea = document.createElement('textarea');
-        textArea.value = content;
-        textArea.style.top = '0';
-        textArea.style.left = '0';
-        textArea.style.position = 'fixed';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-
-        try {
-            document.execCommand('copy');
-            setError(false);
-        } catch (err) {
-            setError(true);
-        }
-
-        document.body.removeChild(textArea);
-    }, []);
+    const [errorMessage, setErrorMessage] = React.useState(DEFAULT_ERROR_MESSAGE);
+    const [copyFocus, setCopyFocus] = React.useState(false);
+    const [refresh, setRefresh] = React.useState(false);
 
     const fetchLoremIpsum = async () => {
         setLoading(true);
@@ -75,14 +71,65 @@ const Generator = () => {
                 `${LOREM_API_URI}?q=${choice.key}&count=${count}&startWithLorem=${startWithLorem.id === 11}`
             );
             const data = await res.json();
+            if (data?.err?.isError) throw new Error(data.err?.message);
             setOutput(data?.data ? data.data : []);
-            setError(false);
+            setCopyFocus(true);
+            if (error) setError(false);
         } catch (err) {
             setError(true);
+            setErrorMessage(err.message);
         } finally {
             setLoading(false);
         }
     };
+
+    React.useEffect(() => {
+        fetchLoremIpsum();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    React.useEffect(() => {
+        if (refresh) {
+            fetchLoremIpsum();
+            setRefresh(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [refresh]);
+
+    const refreshGenerator = React.useCallback(() => {
+        setError(false);
+        setErrorMessage(DEFAULT_ERROR_MESSAGE);
+        setCount(DEFAULT_COUNT);
+        setRefresh(true);
+    }, []);
+
+    const copyTextToClipboard = React.useCallback(
+        (content: string) => {
+            if (!content) return;
+
+            let textArea = document.createElement('textarea');
+            textArea.value = content;
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.position = 'fixed';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                if (error) setError(false);
+            } catch (err) {
+                setError(true);
+                setErrorMessage(err.message);
+            } finally {
+                setCopyFocus(false);
+            }
+
+            document.body.removeChild(textArea);
+        },
+        [error]
+    );
 
     const handleCountChange = React.useCallback(e => {
         setCount(e.target.value);
@@ -99,7 +146,7 @@ const Generator = () => {
 
     const renderContent = () =>
         !error && (
-            <motion.div variants={variants} initial='hidden' animate='visible' className={classes.generator}>
+            <motion.div variants={contentVariants} className={classes.generator}>
                 <div className={classes.optionsWrapper}>
                     <CountInput count={count} label='Count' onChange={handleCountChange} />
                     <Choices
@@ -127,35 +174,31 @@ const Generator = () => {
                     </div>
                     <OutputBox style={{ marginTop: 16 }} output={output} choice={choice.id} />
                 </div>
-                <div className={classes.btnWrapper}>
+                <motion.div variants={buttonVariants} className={classes.btnWrapper}>
                     <Button id='generate-btn' onClick={fetchLoremIpsum}>
                         Generate
                     </Button>
                     <Button
                         id='copy-btn'
-                        focus
+                        focus={copyFocus}
                         onClick={handleCopy}
                         style={{ alignItems: 'center', display: 'flex', gap: 4, paddingRight: 8 }}
                     >
                         Cop{isCopied ? 'ied!' : 'y'}
                         {isCopied ? <ClipBoardChecked height={16} /> : <ClipBoard height={16} />}
                     </Button>
-                </div>
+                </motion.div>
             </motion.div>
         );
 
-    const renderError = () => !loading && error && <AppError label='Something went wrong! Please try again later.' />;
-
-    React.useEffect(() => {
-        fetchLoremIpsum();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const renderError = () =>
+        !loading && <AppError error={error} label={errorMessage} buttonLabel='Refresh' onClick={refreshGenerator} />;
 
     return (
-        <>
+        <motion.div variants={variants}>
             {renderError()}
             {renderContent()}
-        </>
+        </motion.div>
     );
 };
 

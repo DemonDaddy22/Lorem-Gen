@@ -34,7 +34,7 @@ const CountInput = (props: Props) => {
 export default CountInput;
 
 CountInput.defaultProps = {
-    min: 0,
+    min: -1,
     max: 1000,
     containerStyle: {},
     inputStyle: {},

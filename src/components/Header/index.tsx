@@ -17,7 +17,6 @@ const variants = {
         x: 0,
         opacity: 1,
         transition: {
-            delay: 0.75,
             duration: 0.1,
             type: 'spring',
             stiffness: 50
@@ -31,8 +30,6 @@ const Header = (props: HeaderProps) => {
     return (
         <motion.div
             variants={variants}
-            initial='hidden'
-            animate='visible'
             className={classes.header}
             style={{ ...style, color }}
         >

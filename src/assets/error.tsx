@@ -60,24 +60,24 @@ const ErrorImage = (props: Props) => {
                 transform='translate(-31.39089 -100.5)'
                 fill='none'
                 stroke={baseColorPrimary}
-                stroke-miterlimit='10'
-                stroke-width='2'
+                strokeMiterlimit='10'
+                strokeWidth='2'
             />
             <path
                 d='M341,359.5s130-36,138,80-107,149-17,172'
                 transform='translate(-31.39089 -100.5)'
                 fill='none'
                 stroke={baseColorPrimary}
-                stroke-miterlimit='10'
-                stroke-width='2'
+                strokeMiterlimit='10'
+                strokeWidth='2'
             />
             <path
                 d='M215.40233,637.78332s39.0723-10.82,41.47675,24.04449-32.15951,44.78287-5.10946,51.69566'
                 transform='translate(-31.39089 -100.5)'
                 fill='none'
                 stroke={baseColorPrimary}
-                stroke-miterlimit='10'
-                stroke-width='2'
+                strokeMiterlimit='10'
+                strokeWidth='2'
             />
             <path
                 d='M810.09554,663.73988,802.218,714.03505s-38.78182,20.60284-11.51335,21.20881,155.73324,0,155.73324,0,24.84461,0-14.54318-21.81478l-7.87756-52.719Z'
