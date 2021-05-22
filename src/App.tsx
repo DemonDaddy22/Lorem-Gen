@@ -25,6 +25,6 @@ const App = () => {
             <Generator />
         </motion.div>
     );
-}
+};
 
 export default App;
