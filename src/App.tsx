@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import './App.scss';
 import Description from './components/Description';
+import Footer from './components/Footer';
 import Generator from './components/Generator';
 import Header from './components/Header';
 
@@ -23,6 +24,7 @@ const App = () => {
             <Header label='Lorem Gen' />
             <Description />
             <Generator />
+            <Footer />
         </motion.div>
     );
 };

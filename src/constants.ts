@@ -17,3 +17,27 @@ export const START_WITH_LOREM_CHOICES = Object.freeze({
     YES: { id: 11, label: 'Yes', key: 'yes' },
     NO: { id: 12, label: 'No', key: 'no' },
 });
+
+export const FOOTER_LINKS: IFooterLink = {
+    CHROME: {
+        label: 'Chrome Extension',
+        uri: 'https://chrome.google.com/webstore/detail/lorem-gen/abbpnienhlpmlfjjoiogknmjknlaeadp/related',
+    },
+    REPO: {
+        label: 'GitHub',
+        uri: 'https://github.com/DemonDaddy22/',
+    },
+    COFFEE: {
+        label: 'Buy me a Coffee',
+        uri: 'https://www.buymeacoffee.com/rohangupta',
+    },
+};
+
+export interface IFooterLinkValue {
+    label: string;
+    uri: string;
+}
+
+export interface IFooterLink {
+    [key: string]: IFooterLinkValue;
+}

@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.footerLink {
+    color: rgba($color: $secondary, $alpha: 0.5);
+    font-size: 0.6rem;
+    text-decoration: none;
+    transition: color 0.15s;
+
+    &:hover {
+        color: rgba($color: $secondary, $alpha: 0.7);
+    }
+
+    @media (min-width: 768px) {
+        font-size: 0.75rem;
+    }
+}
