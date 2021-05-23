@@ -11,7 +11,7 @@ const variants = {
         rotate: [0, 0, 270, 270, 0],
         borderRadius: ['10%', '10%', '50%', '50%', '10%'],
         transition: {
-            yoyo: Infinity,
+            repeat: Infinity,
             ease: 'easeInOut',
             duration: 2,
             repeatDelay: 0.5,

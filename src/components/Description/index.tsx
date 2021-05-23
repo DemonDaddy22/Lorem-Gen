@@ -9,9 +9,8 @@ const variants = {
     visible: {
         opacity: 1,
         transition: {
-            delay: 0.25,
             when: 'beforeChildren',
-            staggerChildren: 0.45,
+            staggerChildren: 0.3,
         },
     },
 };
@@ -25,7 +24,7 @@ const childVariants = {
         x: 0,
         opacity: 1,
         transition: {
-            duration: 0.15,
+            duration: 0.1,
             type: 'spring',
             stiffness: 40,
         },
