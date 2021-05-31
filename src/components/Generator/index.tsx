@@ -4,9 +4,9 @@ import Triangle from '../../assets/triangle';
 import {
     DEFAULT_ERROR_MESSAGE,
     LOREM_API_URI,
-    CHOICES,
     START_WITH_LOREM_CHOICES,
     DEFAULT_COUNT,
+    OUTPUT_CHOICES
 } from '../../constants';
 import Button from '../Button';
 import Choices from '../Choices';
@@ -54,7 +54,7 @@ const buttonVariants = {
 
 const Generator = () => {
     const [count, setCount] = React.useState(DEFAULT_COUNT);
-    const [choice, setChoice] = React.useState(CHOICES.SENTENCE);
+    const [choice, setChoice] = React.useState(OUTPUT_CHOICES.SENTENCE);
     const [output, setOutput] = React.useState([]);
     const [startWithLorem, setStartWithLorem] = React.useState(START_WITH_LOREM_CHOICES.YES);
     const [isCopied, setIsCopied] = React.useState(false);
@@ -138,7 +138,7 @@ const Generator = () => {
     const handleCopy = React.useCallback(() => {
         if (output?.length) {
             setIsCopied(true);
-            const contentString = output.join(choice.id === CHOICES.PARAGRAPH.id ? '\n\n' : ' ');
+            const contentString = output.join(choice.id === OUTPUT_CHOICES.PARAGRAPH.id ? '\n\n' : ' ');
             copyTextToClipboard(contentString);
             setTimeout(() => setIsCopied(false), 2000);
         }
@@ -151,7 +151,7 @@ const Generator = () => {
                     <CountInput count={count} label='Count' onChange={handleCountChange} />
                     <Choices
                         header='Type'
-                        choices={[CHOICES.WORD, CHOICES.SENTENCE, CHOICES.PARAGRAPH]}
+                        choices={[OUTPUT_CHOICES.WORD, OUTPUT_CHOICES.SENTENCE, OUTPUT_CHOICES.PARAGRAPH]}
                         active={choice}
                         onClick={setChoice}
                     />
